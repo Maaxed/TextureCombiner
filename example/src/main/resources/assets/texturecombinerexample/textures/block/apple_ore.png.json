@@ -1,0 +1,10 @@
+{
+	"operator": "texturecombiner:layers",
+	"inputs": [
+		"minecraft:block/stone",
+		{
+			"operator": "texturecombiner:grayscale",
+			"input": "minecraft:item/apple"
+		}
+	]
+}

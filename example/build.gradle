@@ -1,0 +1,22 @@
+
+version = '1.0'
+group = 'fr.max2.texturecombinerexample' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'TextureCombinerExample'
+
+minecraft {
+    runs {
+        client {
+            mods {
+                texturecombinerexample {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    runtimeOnly rootProject
+}
+
+//throw new GradleException(eclipse.classpath.resolveDependencies().toString())

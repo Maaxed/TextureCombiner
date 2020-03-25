@@ -1,0 +1,7 @@
+{
+	"operator": "texturecombiner:layers",
+	"inputs": [
+		"minecraft:block/stone",
+		"minecraft:block/red_stained_glass"
+	]
+}
