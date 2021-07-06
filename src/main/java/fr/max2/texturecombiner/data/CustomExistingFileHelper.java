@@ -1,4 +1,4 @@
-package fr.max2.texturecombiner;
+package fr.max2.texturecombiner.data;
 
 import java.lang.reflect.Field;
 import java.util.Collections;

@@ -48,7 +48,7 @@ allprojects {
 	        }
 	
 	        server {
-	            workingDirectory project.file('run/client')
+	            workingDirectory project.file('run/server')
 	
 	            // Recommended logging data for a userdev environment
 	            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -72,7 +72,7 @@ allprojects {
 	            // Recommended logging level for the console
 	            property 'forge.logging.console.level', 'debug'
 	
-	            args '--mod', 'texturecombiner', '--all', '--output', file('src/generated/resources/'), '--existing', sourceSets.main.resources.srcDirs[0]
+	            args '--mod', project.name.toLowerCase(), '--all', '--output', file('src/generated/resources/'), '--existing', sourceSets.main.resources.srcDirs[0]
 	
 	            mods {
 	                texturecombiner {

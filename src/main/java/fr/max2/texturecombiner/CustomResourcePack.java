@@ -19,6 +19,7 @@ import com.google.common.base.Joiner;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import fr.max2.texturecombiner.operator.TextureCombination;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.NativeImage;
 import net.minecraft.resources.IResource;
@@ -61,24 +62,27 @@ public class CustomResourcePack extends DelegatableResourcePack
 			return Files.newInputStream(path, StandardOpenOption.READ);
 		}
 		final Path path = modFile.getLocator().findPath(modFile, name + ".json");
-		InputStream jsonStream = Files.newInputStream(path, StandardOpenOption.READ);
-		try (Reader jsonReader = new InputStreamReader(jsonStream))
+		try (InputStream jsonStream = Files.newInputStream(path, StandardOpenOption.READ))
 		{
-			TextureCombination combination;
-			try
+			try (Reader jsonReader = new InputStreamReader(jsonStream))
 			{
-				combination = JSONUtils.fromJson(GSON, jsonReader, TextureCombination.class);
-				if (combination == null)
-					return null;
-			}
-			catch (RuntimeException e)
-			{
-				throw e;
-			}
-			
-			try (NativeImage img = combination.buildTexture(this::getImage))
-			{
-				return new ByteArrayInputStream(img.getBytes());
+				TextureCombination combination;
+				try
+				{
+					combination = JSONUtils.fromJson(GSON, jsonReader, TextureCombination.class);
+					if (combination == null)
+						return null;
+				}
+				catch (RuntimeException e)
+				{
+					e.printStackTrace();
+					throw e;
+				}
+				
+				try (NativeImage img = combination.buildTexture(this::getImage))
+				{
+					return new ByteArrayInputStream(img.getBytes());
+				}
 			}
 		}
 	}
@@ -115,7 +119,7 @@ public class CustomResourcePack extends DelegatableResourcePack
 	public Collection<ResourceLocation> getAllResourceLocations(ResourcePackType type, String namespace, String pathIn, int maxDepth, Predicate<String> filter)
 	{
 		try
-{		
+		{		
 			Path root = modFile.getLocator().findPath(modFile, type.getDirectoryName()).toAbsolutePath();
 			Path inputPath = root.getFileSystem().getPath(pathIn);
 			

@@ -1,4 +1,4 @@
-package fr.max2.texturecombiner.defaultoperators;
+package fr.max2.texturecombiner.operator.defaultoperators;
 
 import javax.annotation.Nullable;
 
@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
-import fr.max2.texturecombiner.ITextureOperator;
+import fr.max2.texturecombiner.operator.ITextureOperator;
 import net.minecraft.client.renderer.texture.NativeImage;
 import net.minecraft.util.JSONUtils;
 
@@ -44,22 +44,22 @@ public enum LayersOperation implements ITextureOperator
 					if (pixA == 0)
 						continue;
 
-					int pixR = (pixels[i] >> 16) & 255;
+					int pixB = (pixels[i] >> 16) & 255;
 					int pixG = (pixels[i] >> 8) & 255;
-					int pixB = pixels[i] & 255;
+					int pixR = pixels[i] & 255;
 					
 					
 					int oldA = (resColor >> 24) & 255;
-					int oldR = (resColor >> 16) & 255;
+					int oldB = (resColor >> 16) & 255;
 					int oldG = (resColor >> 8) & 255;
-					int oldB = resColor & 255;
+					int oldR = resColor & 255;
 					
 					int newAlpha = pixA * 255 + oldA * (255 - pixA);
-					int newR = (pixR * pixA * 255 + oldR * oldA * (255 - pixA)) / newAlpha;
-					int newG = (pixG * pixA * 255 + oldG * oldA * (255 - pixA)) / newAlpha;
 					int newB = (pixB * pixA * 255 + oldB * oldA * (255 - pixA)) / newAlpha;
+					int newG = (pixG * pixA * 255 + oldG * oldA * (255 - pixA)) / newAlpha;
+					int newR = (pixR * pixA * 255 + oldR * oldA * (255 - pixA)) / newAlpha;
 					
-					resColor = ((newAlpha / 255) << 24) | (newR << 16) | (newG << 8) | newB;
+					resColor = ((newAlpha / 255) << 24) | (newB << 16) | (newG << 8) | newR;
 				}
 				
 				return resColor;
@@ -105,7 +105,7 @@ public enum LayersOperation implements ITextureOperator
 			}
 			else
 			{
-				throw new JsonSyntaxException("The invalid option value: " + JSONUtils.toString(options));
+				throw new JsonSyntaxException("Invalid option value: " + JSONUtils.toString(options));
 			}
 		}
 		return NORMAL;

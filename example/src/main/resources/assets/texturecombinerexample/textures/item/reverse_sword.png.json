@@ -1,0 +1,13 @@
+{
+	"operator": "texturecombiner:mirror",
+	"input": {
+		"operator": "texturecombiner:rotate",
+		"input": "minecraft:item/diamond_sword",
+		"options": {
+			"rotation": 90
+		}
+	},
+	"options": {
+		"mirror": "H"
+	}
+}

@@ -1,11 +1,11 @@
-package fr.max2.texturecombiner.defaultoperators;
+package fr.max2.texturecombiner.operator.defaultoperators;
 
 import javax.annotation.Nullable;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 
-import fr.max2.texturecombiner.ITextureOperator;
+import fr.max2.texturecombiner.operator.ITextureOperator;
 import net.minecraft.client.renderer.texture.NativeImage;
 import net.minecraft.util.JSONUtils;
 
@@ -19,7 +19,7 @@ public enum MirrorOperation implements ITextureOperator
 		switch (this)
 		{
 		case HORIZONTAL:
-			return w-u;
+			return w - u - 1;
 		default:
 			return u;
 		}
@@ -30,7 +30,7 @@ public enum MirrorOperation implements ITextureOperator
 		switch (this)
 		{
 		case VERTICAL:
-			return h-v;
+			return h - v - 1;
 		default:
 			return v;
 		}
@@ -66,7 +66,7 @@ public enum MirrorOperation implements ITextureOperator
 		case "vertical":
 			return VERTICAL;
 		default:
-			throw new IllegalArgumentException("Invalid mirror type  : " + mirrorName);
+			throw new IllegalArgumentException("Invalid mirror type: " + mirrorName);
 		}
 	}
 	
@@ -74,7 +74,7 @@ public enum MirrorOperation implements ITextureOperator
 	{
 		if (inputCount != 1)
 		{
-			throw new JsonSyntaxException("The invalid input count : expected 1 but was " + inputCount);
+			throw new JsonSyntaxException("Invalid input count: expected 1 but was " + inputCount);
 		}
 		if (options == null || (options.isJsonObject() && options.getAsJsonObject().entrySet().isEmpty()))
 		{
@@ -87,9 +87,9 @@ public enum MirrorOperation implements ITextureOperator
 		}
 		else if (options.isJsonObject() && options.getAsJsonObject().size() == 1)
 		{
-			return getMirror(JSONUtils.getString(options, "mirror"));
+			return getMirror(JSONUtils.getString(options.getAsJsonObject(), "mirror"));
 		}
 		
-		throw new JsonSyntaxException("The invalid option value: " + JSONUtils.toString(options));
+		throw new JsonSyntaxException("Invalid option value: " + JSONUtils.toString(options));
 	}
 }

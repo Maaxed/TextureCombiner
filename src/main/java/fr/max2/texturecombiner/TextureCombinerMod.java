@@ -23,10 +23,16 @@ import java.util.Objects;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import fr.max2.texturecombiner.defaultoperators.GrayscaleOperation;
-import fr.max2.texturecombiner.defaultoperators.LayersOperation;
-import fr.max2.texturecombiner.defaultoperators.MirrorOperation;
-import fr.max2.texturecombiner.defaultoperators.RotateOperation;
+import fr.max2.texturecombiner.data.CustomExistingFileHelper;
+import fr.max2.texturecombiner.operator.TextureOperatorRegistry;
+import fr.max2.texturecombiner.operator.defaultoperators.ColorOperation;
+import fr.max2.texturecombiner.operator.defaultoperators.GrayscaleOperation;
+import fr.max2.texturecombiner.operator.defaultoperators.HSVColorizeOperation;
+import fr.max2.texturecombiner.operator.defaultoperators.LayersOperation;
+import fr.max2.texturecombiner.operator.defaultoperators.MatchSizeOperation;
+import fr.max2.texturecombiner.operator.defaultoperators.MirrorOperation;
+import fr.max2.texturecombiner.operator.defaultoperators.ResizeOperation;
+import fr.max2.texturecombiner.operator.defaultoperators.RotateOperation;
 
 @Mod(TextureCombinerMod.MOD_ID)
 public class TextureCombinerMod
@@ -59,6 +65,10 @@ public class TextureCombinerMod
 		TextureOperatorRegistry.registerBuilder(new ResourceLocation(MOD_ID, "grayscale"), GrayscaleOperation::build);
 		TextureOperatorRegistry.registerBuilder(new ResourceLocation(MOD_ID, "rotate"), RotateOperation::build);
 		TextureOperatorRegistry.registerBuilder(new ResourceLocation(MOD_ID, "mirror"), MirrorOperation::build);
+		TextureOperatorRegistry.registerBuilder(new ResourceLocation(MOD_ID, "resize"), ResizeOperation::build);
+		TextureOperatorRegistry.registerBuilder(new ResourceLocation(MOD_ID, "match_size"), MatchSizeOperation::build);
+		TextureOperatorRegistry.registerBuilder(new ResourceLocation(MOD_ID, "color"), ColorOperation::build);
+		TextureOperatorRegistry.registerBuilder(new ResourceLocation(MOD_ID, "colorize"), HSVColorizeOperation::build);
 	}
 
 	/**

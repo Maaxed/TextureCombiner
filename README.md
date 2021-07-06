@@ -13,11 +13,11 @@ To generate a texture named `example_mod:block/example` you need to create the f
 	"operator": "operator_mod:operator_id",
 	"inputs": [
 		"mod_id:texture/path",
-		...
+		"other:texture"
 	],
 	"options": {
-		"some_option": some_value,
-		...
+		"some_option": "some_value",
+		"another_option": "another_value"
 	}
 }
 ```
@@ -30,29 +30,29 @@ Attributes:
 
 ### Default Operators
 
-- `texturecombiner:layers`:
-	Place multiple textures on top of each other.
-	The inputs are ordered from the back to the front.
+- `texturecombiner:layers`:  
+	Place multiple textures on top of each other.  
+	The inputs are ordered from the back to the front.  
 	Options:
-	- `"overwrite"`: true / false (default: false)
-		When set to false, the pixels of all layers will be blended together
+	- `"overwrite"`: true / false (default: false)  
+		When set to false, the pixels of all layers will be blended together  
 		When set to true, semi-transparent pixels will overwrite pixels from lower layers
-- `"texturecombiner:grayscale"`:
-	Creates a grayscale copy of the input texture.
-	Exacly one input should be supplied.
+- `texturecombiner:grayscale`:  
+	Creates a grayscale copy of the input texture.  
+	Exacly one input should be supplied.  
 	No options available
-- `"texturecombiner:rotate"`:
-	Creates a rotated copy of the input texture.
-	Exacly one input should be supplied.
+- `texturecombiner:rotate`:  
+	Creates a rotated copy of the input texture.  
+	Exacly one input should be supplied.  
 	Options:
-	- `"rotation"`: -90 / 0 / 90 / 180 (mandatory)
+	- `"rotation"`: -90 / 0 / 90 / 180 (mandatory)  
 		The desired rotation angle (clockwise)
-- `"texturecombiner:mirror"`:
-	Creates a mirrored copy of the input texture.
-	Exacly one input should be supplied.
+- `texturecombiner:mirror`:  
+	Creates a mirrored copy of the input texture.  
+	Exacly one input should be supplied.  
 	Options:
-	- `"mirror"`: "horizontal" / "vertical" (mandatory)
-		When set to "horizontal", left and right will be flipped
+	- `"mirror"`: "horizontal" / "vertical" (mandatory)  
+		When set to "horizontal", left and right will be flipped  
 		When set to "vertical", top and bottom will be flipped
 
 ### Combining operations

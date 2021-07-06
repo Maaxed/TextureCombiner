@@ -1,0 +1,15 @@
+{
+	"operator": "texturecombiner:colorize",
+	"inputs": [
+		{
+			"operator": "texturecombiner:grayscale",
+			"input": "minecraft:item/diamond_chestplate"
+		},
+		{
+			"operator": "texturecombiner:color",
+			"options": {
+				"color": "#44FF89"
+			}
+		}
+	]
+}

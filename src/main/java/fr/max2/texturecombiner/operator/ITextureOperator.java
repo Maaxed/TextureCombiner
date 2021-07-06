@@ -1,4 +1,4 @@
-package fr.max2.texturecombiner;
+package fr.max2.texturecombiner.operator;
 
 import javax.annotation.Nullable;
 
@@ -31,11 +31,11 @@ public interface ITextureOperator
 		NativeImage res = new NativeImage(width, height, false);
 		
 		// For each pixel
+		int[] pixels = new int[inputs.length];
 		for (int u = 0; u < width; u++)
 		{
 			for (int v = 0; v < height; v++)
 			{
-				int[] pixels = new int[inputs.length];
 				for (int i = 0; i < inputs.length; i++)
 				{
 					pixels[i] = inputs[i].getPixelRGBA(u * inputs[i].getWidth() / width, v * inputs[i].getHeight() / height);

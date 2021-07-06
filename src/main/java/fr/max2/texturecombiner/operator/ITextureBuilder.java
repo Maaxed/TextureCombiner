@@ -1,4 +1,4 @@
-package fr.max2.texturecombiner;
+package fr.max2.texturecombiner.operator;
 
 import java.io.IOException;
 

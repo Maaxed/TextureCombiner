@@ -1,4 +1,4 @@
-package fr.max2.texturecombiner;
+package fr.max2.texturecombiner.operator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 
+import fr.max2.texturecombiner.TextureCombinerMod;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -44,7 +45,14 @@ public class TextureOperatorRegistry
 		if (builder == null)
 			throw new JsonSyntaxException("Unknown texture operation type: " + name.toString());
 		
-		return builder.build(inputCount, options);
+		try
+		{
+			return builder.build(inputCount, options);
+		}
+		catch (Exception e)
+		{
+			throw new RuntimeException("Couldn't build operator of type " + name, e);
+		}
 	}
 	
 }

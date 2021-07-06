@@ -1,4 +1,4 @@
-package fr.max2.texturecombiner;
+package fr.max2.texturecombiner.operator;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -41,13 +41,21 @@ public class TextureCombination implements ITextureBuilder
 			{
 				images[i] = inputs[i].buildTexture(finder);
 			}
-			catch (IOException e)
+			catch (IOException | RuntimeException e)
 			{
 				throw new TextureBuildingException("Could not build texture input " + i + " for operator " + operatorName.toString() + " : " + e.getMessage(), e);
 			}
 		}
 		// Apply the operator on the inputs
-		NativeImage result = operator.apply(images);
+		NativeImage result = null;
+		try
+		{
+			result = operator.apply(images);
+		}
+		catch (RuntimeException e)
+		{
+			throw new TextureBuildingException("Error building texture with operator " + operatorName.toString() + " : " + e.getMessage(), e);
+		}
 		
 		for (int i = 0; i < inputs.length; i++)
 		{
